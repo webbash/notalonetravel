@@ -15,10 +15,11 @@ class CreateUserTripsTable extends Migration
     {
         Schema::create('user_trips', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('user_id');
-            $table->integer('from_city_id');
-            $table->integer('country_id');
-            $table->integer('city_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('from_geo_name_id');
+            $table->bigInteger('to_geo_name_id');
+            $table->bigInteger('from_country_id');
+            $table->bigInteger('to_country_id');
             $table->date('date_start');
             $table->date('date_end');
             $table->string('tags');
