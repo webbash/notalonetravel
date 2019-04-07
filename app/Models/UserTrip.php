@@ -11,9 +11,17 @@ use Illuminate\Database\Eloquent\Model;
 class UserTrip extends Model
 {
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * @return array
      */
-    public function getFromGeoAttribute()
+    public function getFromPlaceAttribute()
     {
         return Cache::rememberForever("user_trip_{$this->id}_from_geo", function () {
             return (array) geo_client()->get([
@@ -26,7 +34,7 @@ class UserTrip extends Model
     /**
      * @return array
      */
-    public function getToGeoAttribute()
+    public function getToPlaceAttribute()
     {
         return Cache::rememberForever("user_trip_{$this->id}_to_geo", function () {
             return (array) geo_client()->get([
